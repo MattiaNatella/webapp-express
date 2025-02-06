@@ -15,6 +15,6 @@ Ciao ragazzi, è ora di mettere alla prova le vostre conoscenze iniziando a cost
 - Inserire un middleware per la gestione errori -- V
 
 ### Bonus
-- Inserire delle immagini nel progetto express e dunque nel db
+- Inserire delle immagini nel progetto express e dunque nel db -- V
 - Inserire i dati di connessione al database come variabili d’ambiente -- V
-- Inserire un middleware per la gestione del percorso assoluto delle immagini
+- Inserire un middleware per la gestione del percorso assoluto delle immagini -- V

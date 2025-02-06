@@ -4,6 +4,7 @@ import moviesRouter from './routers/movies.js'
 import errorsHandler from './middlewares/errorsHandler.js';
 import notFound from './middlewares/notFound.js';
 import checkTime from './middlewares/checkTime.js';
+import setImagePath from './middlewares/setImagePath.js';
 
 const app = express()
 const port = process.env.PORT || 3001;
@@ -18,6 +19,10 @@ app.use(express.static('public'))
 
 //Middleware per il parsing della body-request
 app.use(express.json())
+
+
+//middleware gestione percorso dinamico immagini
+app.use(setImagePath)
 
 //Rotta risorsa server
 app.get('/', (req, res) => {

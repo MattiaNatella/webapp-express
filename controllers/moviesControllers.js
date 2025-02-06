@@ -1,4 +1,5 @@
 import connection from "../data/data.js";
+import setImagePath from "../middlewares/setImagePath.js";
 
 //Index
 const index = (req, res) => {
@@ -7,7 +8,14 @@ FROM movies;`
 
     connection.query(sql, (err, results) => {
         if (err) return res.status(500).json({ error: 'Query al database fallita' });
-        res.json(results)
+
+        const movies = results.map(movie => {
+            return {
+                ...movie,
+                image: req.imagePath + movie.image
+            }
+        })
+        res.json(movies)
     });
 
 }
