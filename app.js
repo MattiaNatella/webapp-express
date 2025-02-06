@@ -1,6 +1,8 @@
 import express from 'express'
-const app = express()
 import 'dotenv/config';
+import moviesRouter from './routers/movies.js'
+const app = express()
+
 const port = process.env.PORT || 3001;
 
 
@@ -17,7 +19,7 @@ app.get('/', (req, res) => {
 
 //gestione rotte
 
-// app.use('/movies', moviesRouter)
+app.use('/movies', moviesRouter)
 
 app.listen(port, () => {
     console.log(`sono in ascolto alla porta http://${process.env.DB_HOST}:${port}/`)
