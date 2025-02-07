@@ -5,6 +5,7 @@ import errorsHandler from './middlewares/errorsHandler.js';
 import notFound from './middlewares/notFound.js';
 import checkTime from './middlewares/checkTime.js';
 import setImagePath from './middlewares/setImagePath.js';
+import cors from 'cors'
 
 const app = express()
 const port = process.env.PORT || 3001;
@@ -13,6 +14,11 @@ const port = process.env.PORT || 3001;
 //middleware per l'apertura del server solo in determinati giorni ed orario
 app.use(checkTime)
 
+//middleware autorizzazione client
+
+app.use(cors({
+    origin: 'http://localhost:5173/'
+}))
 
 //serviamo ai client tutti i file dentro alla cartella public
 app.use(express.static('public'))

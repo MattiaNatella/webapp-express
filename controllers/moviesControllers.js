@@ -25,7 +25,7 @@ const show = (req, res) => {
     const id = req.params.id
     const sql = `SELECT *
 FROM movies M
-JOIN reviews R ON M.id = R.movie_id
+LEFT JOIN reviews R ON M.id = R.movie_id
 WHERE M.id = ?;`
 
     connection.query(sql, [id], (err, results) => {
