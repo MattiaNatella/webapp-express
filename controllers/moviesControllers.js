@@ -3,8 +3,10 @@ import setImagePath from "../middlewares/setImagePath.js";
 
 //Index
 const index = (req, res) => {
-    const sql = `SELECT *
-FROM movies;`
+    const sql = `SELECT movies.*, ROUND(AVG(reviews.vote), 0) as average_vote
+FROM movies
+JOIN reviews ON movies.id = reviews.movie_id
+GROUP BY movies.id;`
 
     connection.query(sql, (err, results) => {
         if (err) return res.status(500).json({ error: 'Query al database fallita' });
@@ -23,10 +25,11 @@ FROM movies;`
 const show = (req, res) => {
 
     const id = req.params.id
-    const sql = `SELECT *
-FROM movies M
-LEFT JOIN reviews R ON M.id = R.movie_id
-WHERE M.id = ?;`
+    const sql = `SELECT movies.*, ROUND(AVG(reviews.vote), 0) as average_vote, reviews.text, reviews.name, reviews.vote as user_vote
+    FROM movies
+    JOIN reviews ON movies.id = reviews.movie_id
+    WHERE movies.id = ?
+    GROUP BY movies.reviews.id;`
 
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({ error: 'Query al database fallita' })
@@ -38,7 +41,7 @@ WHERE M.id = ?;`
             genre: results[0].genre,
             release_year: results[0].release_year,
             abstract: results[0].abstract,
-            image: results[0].image,
+            image: req.imagePath + results[0].image,
             created_at: results[0].created_at,
             updated_at: results[0].updated_at,
             reviews: []

@@ -17,7 +17,7 @@ app.use(checkTime)
 //middleware autorizzazione client
 
 app.use(cors({
-    origin: 'http://localhost:5173/'
+    origin: 'http://localhost:5173'
 }))
 
 //serviamo ai client tutti i file dentro alla cartella public
