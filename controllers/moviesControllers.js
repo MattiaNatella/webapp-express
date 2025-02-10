@@ -38,6 +38,8 @@ const show = (req, res) => {
         const movieObj = {
             id: results[0].id,
             title: results[0].title,
+            director: results[0].director,
+            average_vote: results[0].average_vote,
             genre: results[0].genre,
             release_year: results[0].release_year,
             abstract: results[0].abstract,
@@ -51,7 +53,7 @@ const show = (req, res) => {
             movieObj.reviews.push({
                 id: item.id,
                 name: item.name,
-                vote: item.vote,
+                vote: item.user_vote,
                 text: item.text
             })
         })
@@ -62,9 +64,23 @@ const show = (req, res) => {
 
 }
 
+const storeReview = (req, res) => {
+    const id = req.params.id
+    const { name, text, vote } = req.body
+
+    const sql = 'INSERT INTO reviews (name, text, vote, movie_id) VALUES(?, ?, ?, ?);'
+
+    connection.query(sql, [name, text, vote, id], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Query al database fallita' });
+        console.log(results)
+        res.status(201).json({ message: 'Review added' })
+    })
+}
+
 
 
 export default {
     index,
-    show
+    show,
+    storeReview
 }

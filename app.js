@@ -12,13 +12,11 @@ const port = process.env.PORT || 3001;
 
 
 //middleware per l'apertura del server solo in determinati giorni ed orario
-app.use(checkTime)
+//app.use(checkTime)
 
 //middleware autorizzazione client
 
-app.use(cors({
-    origin: 'http://localhost:5173'
-}))
+app.use(cors())
 
 //serviamo ai client tutti i file dentro alla cartella public
 app.use(express.static('public'))
