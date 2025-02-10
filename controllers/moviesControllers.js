@@ -73,7 +73,7 @@ const storeReview = (req, res) => {
     connection.query(sql, [name, text, vote, id], (err, results) => {
         if (err) return res.status(500).json({ error: 'Query al database fallita' });
         console.log(results)
-        res.status(201).json({ message: 'Review added' })
+        res.status(201).json({ message: 'Review added', id: results.insertId })
     })
 }
 
