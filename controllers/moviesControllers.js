@@ -27,7 +27,7 @@ const show = (req, res) => {
     const id = req.params.id
     const sql = `SELECT movies.*, ROUND(AVG(reviews.vote), 0) as average_vote, reviews.text, reviews.name, reviews.vote as user_vote
     FROM movies
-    JOIN reviews ON movies.id = reviews.movie_id
+    LEFT JOIN reviews ON movies.id = reviews.movie_id
     WHERE movies.id = ?
     GROUP BY movies.reviews.id;`
 
