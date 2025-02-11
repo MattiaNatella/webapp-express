@@ -5,7 +5,7 @@ import setImagePath from "../middlewares/setImagePath.js";
 const index = (req, res) => {
     const sql = `SELECT movies.*, ROUND(AVG(reviews.vote), 0) as average_vote
 FROM movies
-JOIN reviews ON movies.id = reviews.movie_id
+LEFT JOIN reviews ON movies.id = reviews.movie_id
 GROUP BY movies.id;`
 
     connection.query(sql, (err, results) => {
@@ -77,10 +77,29 @@ const storeReview = (req, res) => {
     })
 }
 
+const storeFilms = (req, res) => {
+    console.log(req.file)
+
+    const { title, director, genre, release_year, abstract } = req.body
+    const imageName = req.file.filename;
+
+    const sql = "INSERT INTO movies (title, director, genre, release_year, abstract, image) VALUES (? , ? , ? , ? , ? , ?)"
+
+    connection.query(
+        sql,
+        [title, director, genre, release_year, abstract, imageName],
+        (err, results) => {
+            if (err) return res.status(500).json({ error: 'Query al database fallita' });
+            res.status(201).json({ status: 'success', message: 'Film aggiunto con successo!' })
+        })
+
+}
+
 
 
 export default {
     index,
     show,
-    storeReview
+    storeReview,
+    storeFilms
 }

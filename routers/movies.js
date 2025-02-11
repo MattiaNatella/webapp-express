@@ -1,6 +1,6 @@
 import express from 'express'
 import moviesControllers from '../controllers/moviesControllers.js'
-import upload from '../middlewares/multer.jsx'
+import upload from '../middlewares/multer.js'
 const router = express.Router()
 
 

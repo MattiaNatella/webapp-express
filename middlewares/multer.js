@@ -2,7 +2,7 @@ import multer from "multer";
 
 // upload dellimmagine
 const storage = multer.diskStorage({
-    destination: "./public/img/books",
+    destination: "./public/movies_cover",
     filename: (req, file, cb) => {
         // creo un nome univoco per il file
         const uniqueName = `${Date.now()}-${file.originalname}`;
@@ -12,4 +12,4 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-module.exports = upload;
+export default upload
