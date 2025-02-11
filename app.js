@@ -12,7 +12,7 @@ const port = process.env.PORT || 3001;
 
 
 //middleware per l'apertura del server solo in determinati giorni ed orario
-//app.use(checkTime)
+app.use(checkTime)
 
 //middleware autorizzazione client
 

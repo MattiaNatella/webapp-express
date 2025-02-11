@@ -1,5 +1,6 @@
 import express from 'express'
 import moviesControllers from '../controllers/moviesControllers.js'
+import upload from '../middlewares/multer.jsx'
 const router = express.Router()
 
 
@@ -11,7 +12,10 @@ router.get('/', moviesControllers.index)
 //show
 router.get('/:id', moviesControllers.show)
 
-//store
+//storeReviews
 router.post('/:id/reviews', moviesControllers.storeReview)
+
+//storeFilms
+router.post('/', upload.single('image'), moviesControllers.storeFilms)
 
 export default router

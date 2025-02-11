@@ -5,7 +5,7 @@ const checkTime = (req, res, next) => {
     const day = date.getDay();
     const hour = date.getHours();
 
-    if (day >= 0 && day <= 10 && hour >= 9 && hour <= 1) {
+    if (day >= 1 && day <= 5 && hour >= 9 && hour <= 24) {
         next();
     } else {
         res.send('Siamo chiusi')
